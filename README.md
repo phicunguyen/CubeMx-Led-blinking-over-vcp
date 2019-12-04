@@ -28,7 +28,7 @@ The packet sending from window to stm32 as below.
       3. First 2 bytes is opcode.
       4. follow bytes are data. 
       5. All the data bytes and including the opcode will be convert to ascii except the '[' and ']'
-      6. Every hex bytes now become two ascii bytes.
+      6. Every hex byte now become two ascii bytes.
 
 
   
