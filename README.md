@@ -33,16 +33,16 @@ The packet sending from window to stm32 as below.
 This is the freertos task to on window to send the the led blinking packet to stm32 over serial port every 200ms.
 
       void vLedTask(void *arg) {
-        uint8_t buf[4];
+        uint8_t buf[4];                //buffer to hold led packet
         bool led=false;
-        arg = arg;						          //avoid warning
-        buf[0] = SERIAL_PACKET__LED;	//opcode low byte
-        buf[1] = 0x00;					      //opcode high byte
-        buf[2] = 0x01;					      //led number
+        arg = arg;                     //avoid warning
+        buf[0] = SERIAL_PACKET__LED;   //opcode low byte
+        buf[1] = 0x00;                 //opcode high byte
+        buf[2] = 0x01;                 //led number
         while (true) {
           buf[3] = led ? 0x01 : 0x0;		//led on/off
           led = !led;
-          adapter.write(&adapter, buf, 4);
+          adapter.write(&adapter, buf, 4);  //this will form a packet with '[' and ']' and send it
           vTaskDelay(200);
           if (_kbhit() != 0) {
             printf("exit\n");
