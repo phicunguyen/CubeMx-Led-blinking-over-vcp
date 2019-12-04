@@ -30,7 +30,7 @@ The packet sending from window to stm32 as below.
       5. All the data bytes and including the opcode will be convert to ascii except the '[' and ']'
       6. Every hex byte now become two ascii bytes.
 
-This is the freertos task to on window to send the the led blinking packet to stm32 over serial port every 200ms.
+This is the freertos task on window to send the the led blinking packet to stm32 over serial port every 200ms.
 
       void vLedTask(void *arg) {
         uint8_t buf[4];                      //buffer to hold led packet
@@ -43,8 +43,8 @@ This is the freertos task to on window to send the the led blinking packet to st
           buf[3] = led ? 0x01 : 0x0;         //led on/off
           led = !led;
           adapter.write(&adapter, buf, 4);   //this will form a packet with '[' and ']' and send it
-          vTaskDelay(200);
-          if (_kbhit() != 0) {
+          vTaskDelay(200);                   //delay 200ms
+          if (_kbhit() != 0) {               //exit the program if any key is pressed.
             printf("exit\n");
             vTaskEndScheduler();
           }
