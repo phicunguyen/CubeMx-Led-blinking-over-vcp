@@ -51,3 +51,5 @@ This is the freertos task on window to send the the led blinking packet to stm32
         }
       }
   
+This code does not have any flow control. it could cause the data overwritten if the sending is faster than the receving.
+Every packet send should have a response packet. That will be my goal.
